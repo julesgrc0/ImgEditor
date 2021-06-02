@@ -11,14 +11,17 @@ CONFIG += c++11
 SOURCES += \
     image_manager.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    pixeldialog.cpp
 
 HEADERS += \
     image_manager.h \
-    mainwindow.h
+    mainwindow.h \
+    pixeldialog.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    pixeldialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

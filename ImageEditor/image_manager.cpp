@@ -116,7 +116,10 @@ void image_manager::quality(bool b,int quality)
 
 void image_manager::resize(bool b,QSize s)
 {
-    current = this->current.scaled(s.width(),s.height(),Qt::IgnoreAspectRatio,!b ? Qt::TransformationMode::SmoothTransformation : Qt::TransformationMode::FastTransformation);
+    int h = this->current.height() * s.height() /100;
+    int w = this->current.width() * s.width() /100;
+
+    current = this->current.scaled(w,h,Qt::IgnoreAspectRatio,!b ? Qt::TransformationMode::SmoothTransformation : Qt::TransformationMode::FastTransformation);
     this->update();
 }
 

@@ -51,8 +51,11 @@ private slots:
 
     void on_radioButton_toggled(bool checked);
 
+    void on_actionpixels_triggered();
+
 private:
     bool bruteMod = false;
+    int lastsize = 0;
     void buttonActive(bool);
     void updateImage();
     void updateTotalColor();

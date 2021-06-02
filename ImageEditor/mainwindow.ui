@@ -96,6 +96,13 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>Rotation verticale</string>
+       </property>
+      </widget>
+     </item>
      <item row="3" column="0">
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0" colspan="2">
@@ -120,13 +127,6 @@
         </widget>
        </item>
       </layout>
-     </item>
-     <item row="0" column="0">
-      <widget class="QPushButton" name="pushButton_4">
-       <property name="text">
-        <string>Couleur inverse</string>
-       </property>
-      </widget>
      </item>
      <item row="2" column="0">
       <widget class="QPushButton" name="pushButton_3">
@@ -185,10 +185,10 @@
        </item>
       </layout>
      </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="pushButton_2">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="pushButton_4">
        <property name="text">
-        <string>Rotation verticale</string>
+        <string>Couleur inverse</string>
        </property>
       </widget>
      </item>
@@ -329,6 +329,7 @@
     </property>
     <addaction name="separator"/>
     <addaction name="actionexporter"/>
+    <addaction name="actionpixels"/>
     <addaction name="actionouvrir"/>
     <addaction name="actionfermer"/>
    </widget>
@@ -360,9 +361,9 @@
     <string>quiter</string>
    </property>
   </action>
-  <action name="actionrecommencer">
+  <action name="actionpixels">
    <property name="text">
-    <string>recommencer</string>
+    <string>pixels</string>
    </property>
   </action>
  </widget>

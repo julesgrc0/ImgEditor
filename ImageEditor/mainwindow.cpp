@@ -4,6 +4,7 @@
 #include<QMessageBox>
 #include<QColorDialog>
 #include<QListWidget>
+#include "pixeldialog.h"
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -84,8 +85,11 @@ void MainWindow::updateImage()
     size.setWidth(ui->label->width());
     size.setHeight(ui->label->height());
     ui->label->setPixmap(this->manager->getPixmap(size));
-
-    this->ui->listWidget->addItem(QString::number(this->manager->states.length()-1));
+    if(this->lastsize != this->manager->states.length())
+    {
+        this->lastsize = this->manager->states.length();
+        this->ui->listWidget->addItem(QString::number(this->manager->states.length()-1));
+    }
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -220,5 +224,17 @@ void MainWindow::on_pushButton_9_clicked()
 void MainWindow::on_radioButton_toggled(bool checked)
 {
     this->bruteMod = !this->bruteMod;
+}
+
+
+void MainWindow::on_actionpixels_triggered()
+{
+    PixelDialog dpix = PixelDialog(this,this->manager->getPixmap());
+    dpix.exec();
+    QPixmap pixmap = this->manager->getPixmap();
+    if(dpix.valide(&pixmap))
+    {
+
+    }
 }
 
