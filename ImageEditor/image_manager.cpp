@@ -99,18 +99,24 @@ void image_manager::setFilter(QColor color,int intensity)
     this->update();
 }
 
-void image_manager::rotate(int deg)
+void image_manager::rotate(bool b,int deg)
 {
     QTransform t;
     t.rotate(deg);
-    current = this->current.transformed(t);
+    current = this->current.transformed(t, !b ? Qt::TransformationMode::SmoothTransformation : Qt::TransformationMode::FastTransformation);
     this->update();
 }
 
-void image_manager::quality(int quality)
+void image_manager::quality(bool b,int quality)
 {
     quality = 100 - quality;
-    current = this->current.scaled(quality,quality);
+    current = this->current.scaled(quality,quality,Qt::KeepAspectRatio,!b ? Qt::TransformationMode::SmoothTransformation : Qt::TransformationMode::FastTransformation);
+    this->update();
+}
+
+void image_manager::resize(bool b,QSize s)
+{
+    current = this->current.scaled(s.width(),s.height(),Qt::IgnoreAspectRatio,!b ? Qt::TransformationMode::SmoothTransformation : Qt::TransformationMode::FastTransformation);
     this->update();
 }
 

@@ -37,10 +37,26 @@ private slots:
 
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_actionexporter_triggered();
+
+    void on_actionouvrir_triggered();
+
+    void on_actionfermer_triggered();
+
+    void on_pushButton_8_clicked();
+
+    void on_horizontalSlider_7_valueChanged(int value);
+
+    void on_pushButton_9_clicked();
+
+    void on_radioButton_toggled(bool checked);
+
 private:
+    bool bruteMod = false;
     void buttonActive(bool);
     void updateImage();
     void updateTotalColor();
+    int saveQuality = 100;
     image_manager* manager;
     Ui::MainWindow *ui;
 };

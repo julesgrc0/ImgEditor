@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     this->buttonActive(false);
     this->ui->textEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->ui->textEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->setWindowTitle("Image Editor");
 }
 
 MainWindow::~MainWindow()
@@ -70,7 +71,11 @@ void MainWindow::buttonActive(bool act)
     this->ui->pushButton_6->setEnabled(act);
     this->ui->pushButton_7->setEnabled(act);
     this->ui->horizontalSlider_4->setEnabled(act);
-
+    this->ui->horizontalSlider_6->setEnabled(act);
+    this->ui->horizontalSlider_5->setEnabled(act);
+    this->ui->horizontalSlider_7->setEnabled(act);
+    this->ui->pushButton_8->setEnabled(act);
+    this->ui->pushButton_9->setEnabled(act);
 }
 
 void MainWindow::updateImage()
@@ -94,7 +99,7 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_6_clicked()
 {
     int deg = (360* this->ui->horizontalSlider_3->value() )/100;
-   this->manager->rotate(deg);
+   this->manager->rotate(this->bruteMod,deg);
    this->updateImage();
 }
 
@@ -133,7 +138,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_7_clicked()
 {
-    this->manager->quality(this->ui->horizontalSlider_4->value());
+    this->manager->quality(this->bruteMod,this->ui->horizontalSlider_4->value());
     this->updateImage();
 }
 
@@ -148,19 +153,72 @@ void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     if(this->manager->states.length() != item->text().toInt())
     {
-        /*
-        QMessageBox msgBox;
-        msgBox.setText("Retrouver une version anterieure");
-        msgBox.setInformativeText("Etes vous sur de vouloir surpprimer les version supperieur a " + item->text() +" ?");
-        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-
-        if(msgBox.exec() == QMessageBox::Ok)
-        {
-            */
             this->manager->setindex_state(item->text().toInt());
             this->updateImage();
-        //}
     }
+}
+
+
+void MainWindow::on_actionexporter_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Enregistrer l'image"),QString(),tr("Images (*.png)"));
+    if (!fileName.isEmpty())
+    {
+      this->manager->getPixmap().toImage().save(fileName,"PNG",this->saveQuality);
+    }
+}
+
+
+void MainWindow::on_actionouvrir_triggered()
+{
+    QMessageBox msgBox;
+    msgBox.setText("Confirmer l'ouverture d'une nouvelle image");
+    msgBox.setInformativeText("Les modification apporter a l'image actuel ne seront pas sauvegarder.");
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+
+    if(msgBox.exec() == QMessageBox::Ok)
+    {
+    this->ui->textEdit->setText("");
+    this->on_pushButton_clicked();
+    }
+}
+
+
+void MainWindow::on_actionfermer_triggered()
+{
+    this->close();
+}
+
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    QSize s;
+    int w = this->manager->getImage().size().width()  * this->ui->horizontalSlider_5->value() /100;
+     int h = this->manager->getImage().size().height()  * this->ui->horizontalSlider_6->value() /100;
+
+    s.setWidth(w);
+    s.setHeight(h);
+
+    this->manager->resize(this->bruteMod,s);
+    this->updateImage();
+}
+
+
+void MainWindow::on_horizontalSlider_7_valueChanged(int value)
+{
+    this->ui->label_8->setText(QString::number(100 - value)+"% ");
+}
+
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    this->saveQuality = 100 - this->ui->horizontalSlider_7->value();
+}
+
+
+void MainWindow::on_radioButton_toggled(bool checked)
+{
+    this->bruteMod = !this->bruteMod;
 }
 

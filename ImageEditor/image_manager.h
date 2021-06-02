@@ -23,10 +23,10 @@ public:
 
     QSize getSize();
 
-    void resize(QSize);
-    void quality(int);
-    void rotate(int);
-    void scale(int);
+    void resize(bool,QSize);
+    void quality(bool,int);
+    void rotate(bool,int);
+    void scale(bool,int);
 
     QVector<QPixmap> states;
     void setindex_state(int);
