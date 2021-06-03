@@ -39,7 +39,25 @@
     <string>Enregistrer</string>
    </property>
   </widget>
+  <widget class="PixelWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>30</y>
+     <width>321</width>
+     <height>301</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PixelWidget</class>
+   <extends>QWidget</extends>
+   <header>pixelwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

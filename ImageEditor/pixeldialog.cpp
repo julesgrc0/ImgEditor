@@ -9,6 +9,9 @@ PixelDialog::PixelDialog(QWidget *parent,QPixmap pixmap) :
     this->ui->pushButton->setAutoDefault(false);
     this->ui->pushButton_2->setAutoDefault(true);
     this->pixmap = pixmap;
+    this->ui->widget->setPixmap(this->pixmap);
+    this->setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
+
 }
 
 bool PixelDialog::valide(QPixmap *pixmap)

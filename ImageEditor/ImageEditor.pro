@@ -12,12 +12,14 @@ SOURCES += \
     image_manager.cpp \
     main.cpp \
     mainwindow.cpp \
-    pixeldialog.cpp
+    pixeldialog.cpp \
+    pixelwidget.cpp
 
 HEADERS += \
     image_manager.h \
     mainwindow.h \
-    pixeldialog.h
+    pixeldialog.h \
+    pixelwidget.h
 
 FORMS += \
     mainwindow.ui \
