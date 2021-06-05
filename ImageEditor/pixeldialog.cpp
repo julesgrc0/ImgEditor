@@ -11,7 +11,11 @@ PixelDialog::PixelDialog(QWidget *parent,QPixmap pixmap) :
     this->pixmap = pixmap;
     this->ui->widget->setPixmap(this->pixmap);
     this->setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
+}
 
+void PixelDialog::pixmapUpdate(QPixmap pixmap)
+{
+    this->pixmap = pixmap;
 }
 
 bool PixelDialog::valide(QPixmap *pixmap)

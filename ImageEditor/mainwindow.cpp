@@ -67,16 +67,17 @@ void MainWindow::buttonActive(bool act)
     this->ui->pushButton_3->setEnabled(act);
     this->ui->pushButton_4->setEnabled(act);
     this->ui->pushButton_5->setEnabled(act);
-    this->ui->horizontalSlider->setEnabled(act);
-    this->ui->horizontalSlider_3->setEnabled(act);
     this->ui->pushButton_6->setEnabled(act);
     this->ui->pushButton_7->setEnabled(act);
+    this->ui->pushButton_8->setEnabled(act);
+    this->ui->pushButton_9->setEnabled(act);
+
+    this->ui->horizontalSlider->setEnabled(act);
+    this->ui->horizontalSlider_3->setEnabled(act);
     this->ui->horizontalSlider_4->setEnabled(act);
     this->ui->horizontalSlider_6->setEnabled(act);
     this->ui->horizontalSlider_5->setEnabled(act);
     this->ui->horizontalSlider_7->setEnabled(act);
-    this->ui->pushButton_8->setEnabled(act);
-    this->ui->pushButton_9->setEnabled(act);
 }
 
 void MainWindow::updateImage()
@@ -234,7 +235,7 @@ void MainWindow::on_actionpixels_triggered()
     QPixmap pixmap = this->manager->getPixmap();
     if(dpix.valide(&pixmap))
     {
-
+       this->updateImage();
     }
 }
 

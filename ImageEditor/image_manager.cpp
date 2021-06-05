@@ -109,8 +109,14 @@ void image_manager::rotate(bool b,int deg)
 
 void image_manager::quality(bool b,int quality)
 {
-    quality = 100 - quality;
-    current = this->current.scaled(quality,quality,Qt::KeepAspectRatio,!b ? Qt::TransformationMode::SmoothTransformation : Qt::TransformationMode::FastTransformation);
+    int lw = this->pixmap.width();
+    int lh = this->pixmap.height();
+
+    int w = this->pixmap.width() * quality / 100;
+    int h = this->pixmap.height() * quality / 100;
+
+    current = this->current.scaled(w,h,Qt::KeepAspectRatio);//,!b ? Qt::TransformationMode::SmoothTransformation : Qt::TransformationMode::FastTransformation);
+    current = this->current.scaled(lw,lh,Qt::IgnoreAspectRatio,!b ? Qt::TransformationMode::SmoothTransformation : Qt::TransformationMode::FastTransformation);
     this->update();
 }
 
