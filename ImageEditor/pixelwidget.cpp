@@ -4,6 +4,7 @@
 #include<QEvent>
 #include<QMouseEvent>
 #include<QWheelEvent>
+#include<QKeyEvent>
 #include<QContextMenuEvent>
 #include<QMenu>
 
@@ -19,6 +20,11 @@ PixelWidget::PixelWidget(QWidget *parent) : QWidget(parent)
 void PixelWidget::setPixmap(QPixmap pixm)
 {
     this->pixmap = pixm;
+}
+
+QPixmap PixelWidget::getpixmap()
+{
+    return this->pixmap;
 }
 
 void PixelWidget::drawgrid(QPainter& g)
@@ -60,7 +66,6 @@ void PixelWidget::drawcoord(QPainter &g)
 
 bool PixelWidget::event(QEvent *e)
 {
-
     if(e->type() == QEvent::MouseButtonPress)
     {
         this->isPress = true;
@@ -86,7 +91,7 @@ bool PixelWidget::event(QEvent *e)
         }else if(evt->x() <= this->width() && evt->y() <= this->height())
         {
             // scale bug (fix by reset scaleValue to default)
-                this->scaleValue = 100;
+              this->scaleValue = 100;
             //
 
             int w = this->pixmap.width() *this->scaleValue/100;
@@ -99,7 +104,8 @@ bool PixelWidget::event(QEvent *e)
                     int x = evt->x() - this->pos.x();
                     int y = evt->y() - this->pos.y();
 
-                    QImage tmpImg = this->pixmap.toImage();
+                    QImage tmpImg = this->pixmap.toImage(); //.scaled(w,h,Qt::KeepAspectRatio).toImage();
+
                     tmpImg.setPixelColor(QPoint(x,y),Qt::black);
 
                     int drawSize = 1;
@@ -111,8 +117,6 @@ bool PixelWidget::event(QEvent *e)
                         }
                     }
                     this->pixmap.convertFromImage(tmpImg);
-
-                    emit pixmapUpdate(this->pixmap);
                 }
             }
         }
@@ -121,6 +125,10 @@ bool PixelWidget::event(QEvent *e)
     }else if(e->type() == QEvent::Wheel)
     {
         int scrollSpeed = 1;
+        if(this->ctrlPress)
+        {
+            scrollSpeed = 5;
+        }
         QWheelEvent* evt = static_cast<QWheelEvent*>(e);
         if(evt->angleDelta().y() > 1)
         {
@@ -171,11 +179,6 @@ bool PixelWidget::event(QEvent *e)
                 }else if(v == "dessin")
                 {
                     this->moveMod = false;
-
-                    // scale bug (fix by reset scaleValue to default)
-                        this->scaleValue = 100;
-                    //
-
                 }else if(v == "déplacement")
                 {
                     this->moveMod = true;
@@ -192,6 +195,24 @@ bool PixelWidget::event(QEvent *e)
     }
 
     return QWidget::event(e);
+}
+
+void PixelWidget::keyPressEvent(QKeyEvent *e)
+{
+    qDebug() << e->type() << " " << e->key() << " " << Qt::CTRL;
+    if(e->type() == QEvent::KeyPress)
+    {
+       if(e->key() == Qt::CTRL)
+       {
+           this->ctrlPress = true;
+       }
+    }else if(e->type() == QEvent::KeyRelease)
+    {
+       if(e->key() == Qt::CTRL)
+       {
+           this->ctrlPress = false;
+       }
+    }
 }
 
 void PixelWidget::paintEvent(QPaintEvent*)

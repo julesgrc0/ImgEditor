@@ -188,7 +188,13 @@ void image_manager::setindex_state(int index)
 {
         this->pixmap = this->states[index];
         this->current = this->pixmap.toImage();
-        this->update();
+    this->update();
+}
+
+void image_manager::setpixmap(QPixmap pix)
+{
+    this->states.append(pix);
+    this->pixmap = pix;
 }
 
 QPixmap image_manager::invert()

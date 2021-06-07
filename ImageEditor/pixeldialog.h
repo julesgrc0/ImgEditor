@@ -14,7 +14,7 @@ class PixelDialog : public QDialog
 
 public:
     explicit PixelDialog(QWidget *parent,QPixmap pixmap);
-    bool valide(QPixmap *pixmap);
+    bool valide(QPixmap *pix);
 
     ~PixelDialog();
 
@@ -22,8 +22,6 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_clicked();
-
-    void pixmapUpdate(QPixmap pixmap);
 private:
     Ui::PixelDialog *ui;
     bool stop = false;

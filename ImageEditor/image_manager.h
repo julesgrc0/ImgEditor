@@ -30,6 +30,7 @@ public:
 
     QVector<QPixmap> states;
     void setindex_state(int);
+    void setpixmap(QPixmap);
 private:
     void update();
     QImage current;
