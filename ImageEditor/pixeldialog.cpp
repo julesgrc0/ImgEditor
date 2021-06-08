@@ -1,5 +1,6 @@
 #include "pixeldialog.h"
 #include "ui_pixeldialog.h"
+#include<QColorDialog>
 
 PixelDialog::PixelDialog(QWidget *parent,QPixmap pixmap) :
     QDialog(parent),
@@ -37,5 +38,12 @@ void PixelDialog::on_pushButton_clicked()
 {
     this->stop = false;
     this->close();
+}
+
+
+void PixelDialog::on_pushButton_3_clicked()
+{
+   this->pen_color = QColorDialog::getColor(Qt::white,this);
+    this->ui->widget->setcolor(this->pen_color);
 }
 

@@ -27,6 +27,11 @@ QPixmap PixelWidget::getpixmap()
     return this->pixmap;
 }
 
+void PixelWidget::setcolor(QColor c)
+{
+    this->pen_color = c;
+}
+
 void PixelWidget::drawgrid(QPainter& g)
 {
     QPointF p1;
@@ -90,9 +95,6 @@ bool PixelWidget::event(QEvent *e)
             this->pos.setY(y);
         }else if(evt->x() <= this->width() && evt->y() <= this->height())
         {
-            // scale bug (fix by reset scaleValue to default)
-              this->scaleValue = 100;
-            //
 
             int w = this->pixmap.width() *this->scaleValue/100;
             int h = this->pixmap.height() *this->scaleValue/100;
@@ -104,18 +106,23 @@ bool PixelWidget::event(QEvent *e)
                     int x = evt->x() - this->pos.x();
                     int y = evt->y() - this->pos.y();
 
-                    QImage tmpImg = this->pixmap.toImage(); //.scaled(w,h,Qt::KeepAspectRatio).toImage();
+                    x = x * this->pixmap.width() / w ;
+                    y = y * this->pixmap.height() / h;
 
-                    tmpImg.setPixelColor(QPoint(x,y),Qt::black);
+                    QImage tmpImg = this->pixmap.toImage();
+
+                    tmpImg.setPixelColor(QPoint(x,y),this->pen_color);
 
                     int drawSize = 1;
                     for(int k = -drawSize;k < drawSize;k++)
                     {
                         for(int j = -drawSize;j < drawSize;j++)
                         {
-                            tmpImg.setPixelColor(QPoint(x+k,y+j),Qt::black);
+                            tmpImg.setPixelColor(QPoint(x+k,y+j),this->pen_color);
                         }
                     }
+
+
                     this->pixmap.convertFromImage(tmpImg);
                 }
             }

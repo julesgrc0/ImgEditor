@@ -15,9 +15,10 @@ public:
     bool event(QEvent*) override;
     void setPixmap(QPixmap pxm);
     QPixmap getpixmap();
+    void setcolor(QColor);
 signals:
 private:
-
+    QColor pen_color = Qt::black;
     void drawgrid(QPainter& g);
     void drawcoord(QPainter& g);
 
