@@ -47,3 +47,27 @@ void PixelDialog::on_pushButton_3_clicked()
     this->ui->widget->setcolor(this->pen_color);
 }
 
+
+void PixelDialog::on_pushButton_4_clicked()
+{
+    this->pen_size++;
+    if(this->pen_size > this->pixmap.width())
+    {
+        this->pen_size = this->pixmap.width();
+    }
+    this->ui->widget->setsize(this->pen_size);
+    this->ui->label->setText("Taille du crayon: " + QString::number(this->pen_size));
+}
+
+
+void PixelDialog::on_pushButton_5_clicked()
+{
+    this->pen_size--;
+    if(this->pen_size<0)
+    {
+        this->pen_size=0;
+    }
+    this->ui->widget->setsize(this->pen_size);
+    this->ui->label->setText("Taille du crayon: " + QString::number(this->pen_size));
+}
+

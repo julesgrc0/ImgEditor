@@ -24,11 +24,16 @@ private slots:
     void on_pushButton_clicked();
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
+
 private:
     Ui::PixelDialog *ui;
     QColor pen_color;
     bool stop = false;
     QPixmap pixmap;
+    int pen_size = 1;
 };
 
 #endif // PIXELDIALOG_H

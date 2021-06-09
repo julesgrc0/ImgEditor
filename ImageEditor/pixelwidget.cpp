@@ -32,6 +32,11 @@ void PixelWidget::setcolor(QColor c)
     this->pen_color = c;
 }
 
+void PixelWidget::setsize(int s)
+{
+    this->pen_size = s;
+}
+
 void PixelWidget::drawgrid(QPainter& g)
 {
     QPointF p1;
@@ -113,14 +118,17 @@ bool PixelWidget::event(QEvent *e)
 
                     tmpImg.setPixelColor(QPoint(x,y),this->pen_color);
 
-                    int drawSize = 1;
-                    for(int k = -drawSize;k < drawSize;k++)
+                    if(this->pen_size)
                     {
-                        for(int j = -drawSize;j < drawSize;j++)
+                        for(int k = -this->pen_size;k < this->pen_size;k++)
                         {
-                            tmpImg.setPixelColor(QPoint(x+k,y+j),this->pen_color);
+                            for(int j = -this->pen_size;j < this->pen_size;j++)
+                            {
+                                tmpImg.setPixelColor(QPoint(x+k,y+j),this->pen_color);
+                            }
                         }
                     }
+
 
 
                     this->pixmap.convertFromImage(tmpImg);

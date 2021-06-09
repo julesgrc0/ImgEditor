@@ -16,6 +16,7 @@ public:
     void setPixmap(QPixmap pxm);
     QPixmap getpixmap();
     void setcolor(QColor);
+    void setsize(int);
 signals:
 private:
     QColor pen_color = Qt::black;
@@ -23,6 +24,7 @@ private:
     void drawcoord(QPainter& g);
 
     bool isPress = false;
+    int pen_size = 0;
     int scaleValue = 100;
     bool moveMod = true;
     bool lineAbove = false;
